@@ -6,7 +6,11 @@ style: |
 /* @theme uncover */
 blockquote {
     font-size: 20px;
-}   
+} 
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
 ---
 # GIT INTRO
 
@@ -97,16 +101,140 @@ git init
 ## Wypychanie zmian na serwer na przykładzie github.com
 
 ---
-![Git create repo](https://github.com/radekbor/ug-scala-intro/blob/master/git-intro/github-1.png?raw=true "Git create repo]")
+![](https://github.com/radekbor/ug-scala-intro/blob/master/git-intro/github-1.png?raw=true "Create git repo")
+
 ---
-![Git create repo](https://github.com/radekbor/ug-scala-intro/blob/master/git-intro/github-2.png?raw=true "Git create repo]")
+![50% center](https://github.com/radekbor/ug-scala-intro/blob/master/git-intro/github-2.png?raw=true "Push to repo")
 
 ---
 
 
+## Co to jest branch? Do czego służy
+
+
+> Rozgałęzienie oznacza odbicie od głównego pnia linii rozwoju i kontynuację pracy bez wprowadzania tam bałaganu.
+
+```shell
+git checkout -b <branch>
+```
+
 ---
-## Bibliografia
+
+## Rejestracja zmian
+
+Po dokonaniu zmian w naszym projekcie należy je dodać przechowalni (stage)
+```shell
+git add <plik/folder/wzorzec>
+```
+
+Nastepnie należy zapisać migawkę
+```shell
+git commit 
+```
+lub
+```shell
+git commit -m <wiadomosc>
+```
+
+---
+## Publikowanie zmain
+
+W celu publikacji zmian należy użyć komendy 
+```shell
+git push <server> <branch>
+```
+
+---
+## Ale co dalej z ta gałęzią?
+
+W tym celu należ użyć scalania (komenda merge).
+
+Czyli zaaplikowanie zmian z jednej gałęzi do drugiej 
+
+---
+
+## Rodzaje mergowania
+
+- Fast forward
+- Recursive
+- Ours
+- Octopus
+- Resolve
+- Subtree
+
+TODO doczytac
+
+---
+## Konflikty
+
+Pojawiają się wtedy, gdy zostały zmienione te same linijki kodu w na dwóch gałeziach.
+
+TODO obrazek
+
+---
+
+## Jak to zrobić szybko i wygodnie?
+
+- Na rynku istnieje wiele narzedzi graficznych ktore pozwalają rozwiązać konflikty.
+
+--- 
+## Intelij
+
+![](https://blog.jetbrains.com/wp-content/uploads/2016/10/idea-idea_2016_3_vcs_magic_resolve.png)
+
+---
+## Github
+
+Github dodał możliwość rozwiązywanie konflików na stronie
+https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-on-github
+
+---
+## Korzystanie z zmian
+
+W celu skorzystania ze zmian będących na innej gałęzi należy się sciągnać zmiany z serwera
+
+```shell
+git fetch
+```
+Następnie zaaplikować te zmiany przy użycia komendy merge.
+Istnieje tez komenda pozwalająca wykonać te dwie komendy za jendnym razem
+```shell
+git pull <server> <branch>
+```
+
+--- 
+## Rabasing
+
+Jest to sposob scalania zmian z taki że lokalne zmiany bedą zapplikowane nad tymi z drugiego brancha.
+
+---
+
+## Workflow 
+
+Jest to okreslony sposob pracy z gałęziami gita, możemy sie spotkać z gałęziami
+
+- master
+- develop
+- feature
+- release
+- hotfix
+
+--- 
+## Znane workflowy
+
+- [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+- [Github](https://guides.github.com/introduction/flow)
+- [GitLab](https://docs.gitlab.com/ee/topics/gitlab_flow.html)
+
+---
+
+---
+## Źródła
 
 - https://pl.wikipedia.org/wiki/Git_(oprogramowanie)
 - https://git-scm.com/book/pl/v2/Pierwsze-kroki-Podstawy-Git
 - https://dev.to/theme_selection/best-git-gui-clients-for-developers-5023
+- https://blog.jetbrains.com
+- https://docs.github.com
+- https://www.atlassian.com/git/tutorials/comparing-workflows
+- https://nvie.com/posts/a-successful-git-branching-model/
