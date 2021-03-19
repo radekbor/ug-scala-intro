@@ -35,9 +35,16 @@ Oprogramowanie zlużacze do zledzenia zmian w kodzie zrodlowym.
 ## Co to znaczy dla programisty/uzytkownika?
 
 ---
-### Moge sledzic moja(mojego zespolu) historię pracy z plikiem
+### Moge sledzic moja(mojego zespolu) historię pracy z plikiem, `git log`
 
-![Git history](https://github.com/radekbor/ug-scala-intro/blob/master/git-intro/history.png?raw=true "Git history")
+```shell
+commit fcf6673b4d6441ede94dbecd0c3c3dea7dd5d467 (HEAD -> MyBranch, origin/MyBranch)
+Author: Radoslaw Borowiecki <radoslaw.borowiecki@gmail.com>
+Date:   Fri Mar 19 20:53:22 2021 +0100
+
+    Serialize properly create ledger, using fixed to_camle method
+
+```
 
 Co tu widzimy?
 
@@ -49,9 +56,33 @@ Co tu widzimy?
 
 ---
 
-### Gdyby to bylo za malo
-![Git history](https://github.com/radekbor/ug-scala-intro/blob/master/git-intro/show.png?raw=true "Git history")
+### Gdyby to bylo za malo, `git show hash` 
+```shell
+commit fcf6673b4d6441ede94dbecd0c3c3dea7dd5d467 (HEAD -> MyBranch, origin/MyBranch)
+Author: Radoslaw Borowiecki <radoslaw.borowiecki@gmail.com>
+Date:   Fri Mar 19 20:53:22 2021 +0100
 
+    Serialize properly create ledger, using fixed to_camle method
+
+diff --git a/app/pysga/command/ledger.py b/app/pysga/command/ledger.py
+index f610b1a..6312c26 100644
+--- a/app/pysga/command/ledger.py
++++ b/app/pysga/command/ledger.py
+@@ -9,7 +9,11 @@ from ..engine import Command
+ 
+ 
+ def to_camel(string: str) -> str:
+-    return "".join(word.capitalize() for word in string.split("_"))
++    capitalized = "".join(
++        word.capitalize() if i > 0 else word.lower()
++        for i, word in enumerate(string.split("_"))
++    )
++    return capitalized
+ 
+ 
+:
+
+```
 
 ----
 ## A co to znaczy rozproszony? 
@@ -206,9 +237,33 @@ git pull <server> <branch>
 ## Rabasing
 
 Jest to sposob scalania zmian z taki że lokalne zmiany bedą zapplikowane nad tymi z drugiego brancha.
+Najpopularniejszy sposob na korzystanie z rebasingu
+
+```shell
+git pull origin master --rebase
+```
 
 ---
+## A co z plikami wyjsciowymi lub innymi?
 
+W celu oznaczenia, że jakiś plik lub katalg nie jest istotny należy dodac wzorzec do pliku `.gitignore`, gdy plik nie istnieje należy go stworzyc.
+
+```.gitignore
+# Created by Jayesh J.
+
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
+target/
+```
+
+Wiecej o wzorcach:
+https://git-scm.com/docs/gitignore
+
+
+---
 ## Workflow 
 
 Jest to okreslony sposob pracy z gałęziami gita, możemy sie spotkać z gałęziami
@@ -233,6 +288,7 @@ Jest to okreslony sposob pracy z gałęziami gita, możemy sie spotkać z gałę
 
 - https://pl.wikipedia.org/wiki/Git_(oprogramowanie)
 - https://git-scm.com/book/pl/v2/Pierwsze-kroki-Podstawy-Git
+- https://git-scm.com/docs/gitignore
 - https://dev.to/theme_selection/best-git-gui-clients-for-developers-5023
 - https://blog.jetbrains.com
 - https://docs.github.com
